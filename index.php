@@ -5,6 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Crash Blog</title>
+  <link rel="stylesheet" media="screen and (max-width: 780px)" href="css/small.css">
+  <link rel="stylesheet" media="screen and (min-width: 781px) and (max-width: 1200px)" href="css/medium.css">
+  <link rel="stylesheet" media="screen and (min-width: 1201px)" href="css/large.css">
   <link rel="stylesheet" href="css/base.css">
   <link href="https://fonts.googleapis.com/css?family=Krona+One|Montserrat|Titillium+Web" rel="stylesheet">
 </head>
@@ -22,22 +25,19 @@
     <section>
 
         <div id='creation'>
-          <h2>Création :</h2>
-          <ul>
-            <li><a href="auteur.php">Auteur</a></li>
-            <li><a href="categorie.php">Catégorie</a></li>
-            <li><a href="article.php">Article</a></li>
-          </ul>
+          <h2>Création&nbsp;:</h2>
+          <p><a href="auteur.php">Auteur</a></p>
+          <p><a href="categorie.php">Catégorie</a></p>
+          <p><a href="article.php">Article</a></p>
+          </h3>
         </id>
       </div>
 
       <div class="separateur"></div>
 
       <div id='consult'>
-        <h2>Consultation :</h2>
-        <ul>
-          <li><a href="consultation.php">Articles en ligne</a></li>
-        </ul>
+        <h2>Consultation&nbsp;:</h2>
+          <p><a href="consultation.php">Articles en ligne</a></p>
       </div>
 
     </section>
