@@ -15,13 +15,13 @@
 {
   margin: 0;
   padding: 0;
+  /* border: 1px dotted grey; */
 }
 
 header
 {
   color: var(--color_emphasize1);
   background-color: var(--bg_color_2);
-  line-height: 5em;
   font-family: var(--txt_font_emphasize);
   padding: 0 20%;
 }
@@ -29,7 +29,6 @@ header
 main
 {
   color: var(--txt_color_neutral);
-  margin: 1.5em 20%;
   font-family: var(--txt_font_base);
 }
 
@@ -38,7 +37,7 @@ section
   margin: 2em 0;
   display: flex;
   width: 100%;
-  justify-content: space-between;
+  justify-content: space-around;
 }
 
 .separateur
@@ -54,13 +53,8 @@ section
 
 ul
 {
-  flex: 1;
-}
-
-li
-{
-  list-style-type: none;
-  padding: 0.3em 1.5em;
+  display: flex;
+  justify-content: space-between;
 }
 
 h1
@@ -72,16 +66,18 @@ h2
 {
   font-family: var(--txt_font_emphasize2);
   color: var(--color_emphasize2);
-}
-
-#consult li
-{
-  line-height: 6em;
+  font-variant: small-caps;
 }
 
 p, li
 {
   font-size: 1.2em;
+  padding: 0.3em 1.5em;
+}
+
+li
+{
+  list-style-type: none;
 }
 
 a
