@@ -14,7 +14,7 @@
 <body>
 
   <header>
-    <h1>Crash Blog</h1>
+    <h1><a href="http://localhost/dev/CrashBlog/index.php">Crash Blog</a></h1>
   </header>
 
   <main>
