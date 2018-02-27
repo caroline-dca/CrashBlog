@@ -1,7 +1,6 @@
 <!-- Code by Laure -->
 <?php
 
-// echo "<input type='text' name='newCat' placeholder='catégorie'>";
 
 $servername = "localhost";
 $database = 'CrashBlog_Equipe1';
@@ -14,7 +13,7 @@ try {
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
     // echo "Connected successfully";
-    print_r('<input list="Categorie" placeholder="Choix de catégorie">');
+    print_r('<input list="Categorie" placeholder="Catégories existantes">');
     print_r('<datalist id="Categorie">');
     foreach ($conn->query('SELECT * FROM Categorie') as $ligne) {
         print_r('<option value="' . $ligne[Nom_Categorie] . '">');
@@ -26,6 +25,7 @@ catch(PDOException $e) {
   echo "La connexion a échoué : " . $e->getMessage();
     }
 
+    echo "<input type='text' name='newCat' placeholder='Nouvelle catégorie'>";
 
 // $query = "SELECT nom_pays FROM pays_table WHERE nom_pays='FRANCE'";
 //         $result = db_query($query);
