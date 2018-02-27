@@ -15,32 +15,40 @@
 {
   margin: 0;
   padding: 0;
-  /* border: 1px dotted grey; */
 }
 
 header
 {
   color: var(--color_emphasize1);
   background-color: var(--bg_color_2);
+  line-height: 5em;
   font-family: var(--txt_font_emphasize);
-  padding: 0 20%;
+  padding: 0 30%;
 }
 
-body
+main
 {
   color: var(--txt_color_neutral);
+  margin: 1.5em 20%;
   font-family: var(--txt_font_base);
 }
 
-section
+form
 {
-  margin: 2em 0;
-  display: flex;
-  width: 100%;
-  justify-content: space-around;
+  margin: 1em 0; 
 }
 
-.separateur
+select 
+{
+  
+}
+
+input 
+{
+  margin-top: 10px;
+}
+
+/* .separateur
 {
   width: 0.5em;
   background-image: repeating-linear-gradient(-45deg,
@@ -49,37 +57,61 @@ section
                   transparent 10px,
                   var(--color_emphasize2) 20px,
                   transparent 20px);
-}
+} */
 
-ul
+/* ul
 {
-  display: flex;
-  justify-content: space-between;
-}
+  flex: 1;
+} */
+
+/* li
+{
+  list-style-type: none;
+  padding: 0.3em 1.5em;
+} */
 
 h1
 {
   text-align: center;
 }
 
-h1, a:visited
-{
-  text-decoration: none;
-  color: var(--color_emphasize2);
-}
-
 h2
 {
   font-family: var(--txt_font_emphasize2);
   color: var(--color_emphasize2);
-  font-variant: small-caps;
 }
 
-li
+.categorie  
 {
-  list-style-type: none;
+  margin-left: 30px;
 }
 
+.auteur
+{
+  margin-left: 49px;
+ 
+  width: 135px;
+}
+
+/* #consult li
+{
+  line-height: 6em;
+} */
+/* 
+p, li
+{
+  font-size: 1.2em;
+} */
+
+.class1
+{
+  margin-left: 10px;
+}
+
+.clique2
+ {
+   margin-left: 60px;
+ }
 a
 {
   text-decoration: none;
@@ -94,4 +126,9 @@ a:hover
 a:visited
 {
   color: var(--color_emphasize2);
+}
+
+h1, a:visited
+{
+  text-decoration: none;
 }
