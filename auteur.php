@@ -39,23 +39,9 @@ session_start();
 
     </form>
 
-
-                 
+               
     </section>
 
-    <p> <?php 
-    
-    // if (isset($_POST["submit"])) {
-      
-      if ($email){
-        echo "<p> Votre email: " . $email . "</p>";
-      } 
-      if ($name){
-        echo "<p> Votre nom: " . $name . "</p>";
-      }   
-
-  ?> 
-  </p>
   </main>
 
   <?php
@@ -84,8 +70,11 @@ try {
            $email = $_POST["email"];
            $name = $_POST["name"];
            
-           if ($email){
+           if ($name){
              $requete->execute();
+           }
+           else {
+             echo "<script> alert('Nom obligatoire') </script>";
            }
 
     }
