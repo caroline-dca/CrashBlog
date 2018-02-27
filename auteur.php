@@ -46,8 +46,7 @@ session_start();
     <p> <?php 
     
     // if (isset($_POST["submit"])) {
-      $email = $_POST["email"];
-      $name = $_POST["name"];
+      
       if ($email){
         echo "<p> Votre email: " . $email . "</p>";
       } 
@@ -74,12 +73,20 @@ try {
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     // echo "Connected successfully";
    
-           foreach($conn->query("SELECT * FROM Auteur" as $row) {
+           $requete = $conn->prepare(
+                "INSERT INTO Auteur (Nom_Auteur,Mail_Auteur)
+                VALUES  (:name, :email)"
+           );
 
-            echo '<p>'.$row["Nom_Auteur"].'</p>';
-            echo '<p>'.$row["Email_Auteur"].'</p>';
-
-            }
+           $requete->bindParam(':name', $name);
+           $requete->bindParam(':email', $email);
+                     
+           $email = $_POST["email"];
+           $name = $_POST["name"];
+           
+           if ($email){
+             $requete->execute();
+           }
 
     }
 catch(PDOException $e)
