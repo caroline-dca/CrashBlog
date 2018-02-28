@@ -1,12 +1,53 @@
-input
-{
-  background-color:  var(--bg_color_2);
-  border-radius: 3em;
-  border: none;
+#form {
+  width: 600px;
+  border: 1px solid #c2c2c2;
+  padding: 20px;
+  box-shadow: 5px 5px 3px 0px rgba(0,0,0,0.29);
+}
+
+input {
+  width: 100%;
+  margin: 0;
+  -webkit-box-sizing: border-box;
+  /* Pour les anciennes versions des navigateurs WebKit */
+  -moz-box-sizing: border-box;
+  /* Pour tous les navigateurs Gecko */
+  box-sizing: border-box;
+  background-color:  var(--bg_color_2);  
   padding: 0.2em 1em;
-  width: 10em;
   color: inherit;
 }
+
+#submit {
+  margin-top:10px;
+  width: 80px;
+}
+
+#creationAuteur
+{
+  margin-top: 200px;
+  width: 800px;
+  margin: auto;
+}
+
+#listeAuteurs
+{
+  padding-top: 20px;
+}
+
+table
+{
+border-collapse: collapse;
+width: 400px;
+color: white
+}
+
+td
+{
+  border: 1px solid;
+  padding: 5px 5px;
+}
+
 
 ::-webkit-input-placeholder { /* Chrome/Opera/Safari */
   color: var(--color_emphasize1);
