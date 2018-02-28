@@ -1,3 +1,5 @@
+/* Code by Laure */
+
 :root
 {
   --bg_color: rgb(46, 46, 46);
@@ -15,21 +17,20 @@
 {
   margin: 0;
   padding: 0;
+  /* border: 1px dotted grey; */
 }
 
 header
 {
   color: var(--color_emphasize1);
   background-color: var(--bg_color_2);
-  line-height: 5em;
   font-family: var(--txt_font_emphasize);
   padding: 0 20%;
 }
 
-main
+body
 {
   color: var(--txt_color_neutral);
-  margin: 1.5em 20%;
   font-family: var(--txt_font_base);
 }
 
@@ -38,7 +39,7 @@ section
   margin: 2em 0;
   display: flex;
   width: 100%;
-  justify-content: space-between;
+  justify-content: space-around;
 }
 
 .separateur
@@ -54,13 +55,8 @@ section
 
 ul
 {
-  flex: 1;
-}
-
-li
-{
-  list-style-type: none;
-  padding: 0.3em 1.5em;
+  display: flex;
+  justify-content: space-between;
 }
 
 h1
@@ -78,16 +74,12 @@ h2
 {
   font-family: var(--txt_font_emphasize2);
   color: var(--color_emphasize2);
+  font-variant: small-caps;
 }
 
-#consult li
+li
 {
-  line-height: 6em;
-}
-
-p, li
-{
-  font-size: 1.2em;
+  list-style-type: none;
 }
 
 a
@@ -104,4 +96,10 @@ a:hover
 a:visited
 {
   color: var(--color_emphasize2);
+}
+
+center
+{
+  padding: 0.3em;
+  margin: 1em;
 }
