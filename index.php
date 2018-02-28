@@ -29,9 +29,9 @@
 
         <div id='creation'>
           <h2>Création&nbsp;:</h2>
-          <p><a href="#" id="auteur">Auteur</a></p>
-          <p><a href="#" id="categorie">Catégorie</a></p>
-          <p><a href="#" id="article">Article</a></p>
+          <p><a href="#modale_auteur" id="auteur">Auteur</a></p>
+          <p><a href="#modale_categorie" id="categorie">Catégorie</a></p>
+          <p><a href="#article" id="article">Article</a></p>
         </div>
 
 
@@ -44,8 +44,19 @@
 
     </section>
 
-    <?php include 'categorie.php' ?>
-    <script type="text/javascript" src="js/onevent.js"></script> 
+    <div id="modale_auteur">
+      <?php include 'auteur.php' ?>
+    </div>
+
+    <div id="modale_categorie">
+      <?php include 'categorie.php' ?>
+    </div>
+
+    <div id="modale_article">
+      <?php include 'article.php' ?>
+    </div>
+
+    <script type="text/javascript" src="js/onevent.js"></script>
 
     <!-- <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script> -->
 
