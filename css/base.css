@@ -103,3 +103,25 @@ center
   padding: 0.3em;
   margin: 1em;
 }
+
+
+[id^='modale_']
+{
+  background-color: var(--bg_color_2);
+  height: 0;
+  visibility: hidden;
+}
+
+[id^='modale_']:target
+{
+  width: 80%;
+  height: 80%;
+  margin: auto;
+  padding: 1em;
+  visibility: visible;
+}
+
+#modale_article
+{
+  overflow-y: scroll;
+}
