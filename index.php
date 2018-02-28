@@ -12,6 +12,7 @@
   <link rel="stylesheet" href="css/base.css">
   <link rel="stylesheet" href="css/form.css">
   <link href="https://fonts.googleapis.com/css?family=Krona+One|Montserrat|Titillium+Web" rel="stylesheet">
+  <!-- <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>-->
 </head>
 <body>
 
@@ -28,23 +29,37 @@
 
         <div id='creation'>
           <h2>Création&nbsp;:</h2>
-          <p><a href="auteur.php">Auteur</a></p>
-          <p><a href="categorie.php">Catégorie</a></p>
-          <p><a href="article.php">Article</a></p>
-          </h3>
-        </id>
-      </div>
+          <p><a href="#modale_auteur" id="auteur">Auteur</a></p>
+          <p><a href="#modale_categorie" id="categorie">Catégorie</a></p>
+          <p><a href="#article" id="article">Article</a></p>
+        </div>
 
-      <div class="separateur"></div>
 
-      <div id='consult'>
-        <h2>Consultation&nbsp;:</h2>
+        <div class="separateur"></div>
+
+        <div id='consult'>
+          <h2>Consultation&nbsp;:</h2>
           <p><a href="consultation.php">Articles en ligne</a></p>
-      </div>
+        </div>
 
     </section>
 
-    <?php include 'categorie.php'; ?>
+    <div id="modale_auteur">
+      <?php include 'auteur.php' ?>
+    </div>
+
+    <div id="modale_categorie">
+      <?php include 'categorie.php' ?>
+    </div>
+
+    <div id="modale_article">
+      <?php include 'article.php' ?>
+    </div>
+
+    <script type="text/javascript" src="js/onevent.js"></script>
+
+    <!-- <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script> -->
+
   </main>
 </body>
 </html>
