@@ -1,21 +1,88 @@
 #form {
-    width: 600px;
-    border: 1px solid #c2c2c2;
-    padding: 10px;
-    box-shadow: 5px 5px 3px 0px rgba(0,0,0,0.29);
-  }
+  width: 600px;
+  border: 1px solid #c2c2c2;
+  padding: 20px;
+  box-shadow: 5px 5px 3px 0px rgba(0,0,0,0.29);
+}
 
-  input {
-    width: 100%;
-    margin: 0;
-    /* -webkit-box-sizing: border-box; */
-    /* Pour les anciennes versions des navigateurs WebKit */
-    /* -moz-box-sizing: border-box; */
-    /* Pour tous les navigateurs Gecko */
-    box-sizing: border-box;
-  }
+input {
+  width: 100%;
+  margin: 0;
+  -webkit-box-sizing: border-box;
+  /* Pour les anciennes versions des navigateurs WebKit */
+  -moz-box-sizing: border-box;
+  /* Pour tous les navigateurs Gecko */
+  box-sizing: border-box;
+  background-color:  var(--bg_color_2);  
+  padding: 0.2em 1em;
+  color: inherit;
+}
 
-  #submit {
-    margin-top:10px;
-    width: 80px;
-  }
+#submit {
+  margin-top:10px;
+  width: 80px;
+}
+
+#creationAuteur
+{
+  margin-top: 200px;
+  width: 800px;
+  margin: auto;
+}
+
+#listeAuteurs
+{
+  padding-top: 20px;
+}
+
+table
+{
+border-collapse: collapse;
+width: 400px;
+color: white
+}
+
+td
+{
+  border: 1px solid;
+  padding: 5px 5px;
+}
+
+
+::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+  color: var(--color_emphasize1);
+}
+::-moz-placeholder { /* Firefox 19+ */
+  color: var(--color_emphasize1);
+}
+:-ms-input-placeholder { /* IE 10+ */
+  color: var(--color_emphasize1);
+}
+:-moz-placeholder { /* Firefox 18- */
+  color: var(--color_emphasize1);
+}
+
+ul
+{
+  display: flex;
+  flex-direction: column;
+}
+
+#cat
+{
+  display: flex;
+  /* flex-direction: column; */
+  flex-wrap: wrap;
+}
+
+#cat p
+{
+  flex-grow: 1;
+  flex-shrink: 0;
+  flex-basis: 20%;
+}
+
+#cat input[type="radio"]
+{
+  width: 2em;
+}

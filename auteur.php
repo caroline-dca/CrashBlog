@@ -15,81 +15,119 @@ session_start();
 </head>
 <body>
 
-  <header>
-    <h1>Crash Blog</h1>
-  </header>
-
-  <main>
-  <h2>Ajouter un auteur :</h2>
-    <section>
-    
-    <form method="post" action = "" id="form">
-      
-      <p>
-        <label for="name">Nom, prénom ou pseudo</label>
-        <input type="text" name="name" id="name">
-      </p>
-      <p>
-        <label for="email">Email</label>
-        <input type="email" name="email" id="email">
-      </p>
-      <p>
-        <input type="submit" id="submit" value="Ajouter">
-      </p>
-
-    </form>
 
 
-                 
-    </section>
+    <div id="creationAuteur">    
+      <form method="post" action = "" id="form">        
+        <p>
+          <label for="name">Nom, prénom ou pseudo</label>
+          <input type="text" name="name" id="name">
+        </p>
+        <p>
+          <label for="email">Email</label>
+          <input type="email" name="email" id="email">
+        </p>
+        <p>
+          <input type="submit" id="submit" value="Ajouter">
+        </p>
+      </form>    
 
-    <p> <?php 
-    
-    // if (isset($_POST["submit"])) {
-      $email = $_POST["email"];
-      $name = $_POST["name"];
-      if ($email){
-        echo "<p> Votre email: " . $email . "</p>";
-      } 
-      if ($name){
-        echo "<p> Votre nom: " . $name . "</p>";
-      }   
+        <?php
 
-  ?> 
-  </p>
+          $servername = "localhost";
+          $username = "caroline";
+          $password = "LvebdlB2022";
+          $dbname = "CrashBlog_Equipe1";
+
+
+          try {
+              $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
+              // set the PDO error mode to exception
+              $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+              // echo "Connected successfully";
+            
+                    $requete = $conn->prepare(
+                          "INSERT INTO Auteur (Nom_Auteur,Mail_Auteur)
+                          VALUES  (:name, :email)"
+                    );
+
+                    $requete->bindParam(':name', $name);
+                    $requete->bindParam(':email', $email);
+                              
+                    // if (isset($_POST))){
+                      if (isset($_POST["name"])){
+                        $email = $_POST["email"];
+                        $name = $_POST["name"]; 
+                        if ($name){
+                          $requete->execute();
+                          echo "<script> alert('Instertion OK') </script>";
+                        }
+
+                      
+                      }
+                        // else {
+                        //    echo "<script> alert('Nom obligatoire') </script>";
+                        // }
+                    // }
+                    
+
+              }
+          catch(PDOException $e)
+              {
+              echo "Connection failed: " . $e->getMessage();
+              die();
+              }
+
+
+          ?> 
+
+
+      <div id = "listeAuteurs">
+          <p>Liste des auteurs déjà enregistrés:</p>     
+
+
+          <?php
+
+                $servername = "localhost";
+                $username = "caroline";
+                $password = "LvebdlB2022";
+                $dbname = "CrashBlog_Equipe1";
+
+
+                try {
+                    $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
+                    // set the PDO error mode to exception
+                    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+                    // echo "Connected successfully";
+                  
+                    echo '<table>'."\n";
+                    echo '<tr>';
+                    echo '<td>Nom/Prénom/Pseudo</td>';
+                    echo '<td>Email</td>';
+                    echo '</tr>'."\n";
+                    foreach($conn->query("SELECT * FROM Auteur") as $row) {
+                        echo '<tr>';
+                        echo '<td>'.$row["Nom_Auteur"].'</td>';
+                        echo '<td>'.$row["Mail_Auteur"].'</td>';
+                        echo '</tr>'."\n";
+                        }
+                    echo '</table>'."\n";
+
+                    }
+                catch(PDOException $e)
+                    {
+                    echo "Connection failed: " . $e->getMessage();
+                    die();
+                    }
+
+                    $conn->close();
+
+                    if (!isset($_POST["submit"])){
+                      session_destroy();
+                  }
+                ?>     
+      </div>
+    </div>
   </main>
-
-  <?php
-
-
-$servername = "localhost";
-$username = "caroline";
-$password = "LvebdlB2022";
-$dbname = "CrashBlog_Equipe1";
-
-
-try {
-    $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
-    // set the PDO error mode to exception
-    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    // echo "Connected successfully";
-   
-           foreach($conn->query("SELECT * FROM Auteur" as $row) {
-
-            echo '<p>'.$row["Nom_Auteur"].'</p>';
-            echo '<p>'.$row["Email_Auteur"].'</p>';
-
-            }
-
-    }
-catch(PDOException $e)
-    {
-    echo "Connection failed: " . $e->getMessage();
-    die();
-    }
-
-
-$conn->close();
-?> 
 </body>
 </html>
