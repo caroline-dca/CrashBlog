@@ -64,6 +64,12 @@ h1
   text-align: center;
 }
 
+h1, a:visited
+{
+  text-decoration: none;
+  color: var(--color_emphasize2);
+}
+
 h2
 {
   font-family: var(--txt_font_emphasize2);
@@ -98,9 +104,18 @@ center
   margin: 1em;
 }
 
-div [id*='modale_']
+[id^='modale_']
+{
+  background-color: var(--bg_color_2);
+  height: 0;
+  visibility: hidden;
+}
+
+[id^='modale_']:target
 {
   width: 80%;
   height: 80%;
-  background-color: silver;
+  margin: auto;
+  padding: 1em;
+  visibility: visible;
 }
