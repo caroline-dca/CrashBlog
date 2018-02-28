@@ -97,3 +97,10 @@ center
   padding: 0.3em;
   margin: 1em;
 }
+
+div [id*='modale_']
+{
+  width: 80%;
+  height: 80%;
+  background-color: silver;
+}
