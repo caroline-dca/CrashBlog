@@ -1,34 +1,38 @@
 #form {
-    width: 600px;
-    border: 1px solid #c2c2c2;
-    padding: 10px;
-    box-shadow: 5px 5px 3px 0px rgba(0,0,0,0.29);
-  }
+  width: 600px;
+  border: 1px solid #c2c2c2;
+  padding: 20px;
+  box-shadow: 5px 5px 3px 0px rgba(0,0,0,0.29);
+}
 
-  input {
-    width: 100%;
-    margin: 0;
-    /* -webkit-box-sizing: border-box; */
-    /* Pour les anciennes versions des navigateurs WebKit */
-    /* -moz-box-sizing: border-box; */
-    /* Pour tous les navigateurs Gecko */
-    box-sizing: border-box;
-  }
+input {
+  width: 100%;
+  margin: 0;
+  -webkit-box-sizing: border-box;
+  /* Pour les anciennes versions des navigateurs WebKit */
+  -moz-box-sizing: border-box;
+  /* Pour tous les navigateurs Gecko */
+  box-sizing: border-box;
+}
 
-  #submit {
-    margin-top:10px;
-    width: 80px;
-  }
+#submit {
+  margin-top:10px;
+  width: 80px;
+}
 
-#listeAuteurs{
+#listeAuteurs
+{
   /* display: flex; */
 }
 
-table{
+table
+{
 border-collapse: collapse;
 width: 400px;
 }
-td{
+
+td
+{
   border: 1px solid;
   padding: 5px 5px;
 }

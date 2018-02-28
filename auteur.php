@@ -16,7 +16,7 @@ session_start();
 <body>
 
   <header>
-    <h1>Crash Blog</h1>
+    <h1><a href="http://localhost/dev/CrashBlog/index.php">Crash Blog</a></h1>
   </header>
 
   <main>
@@ -60,15 +60,22 @@ session_start();
                   $requete->bindParam(':name', $name);
                   $requete->bindParam(':email', $email);
                             
-                  $email = $_POST["email"];
-                  $name = $_POST["name"];
+                  // if (isset($_POST))){
+                    if (isset($_POST["name"])){
+                      $email = $_POST["email"];
+                      $name = $_POST["name"]; 
+                      if ($name){
+                        $requete->execute();
+                        echo "<script> alert('Instertion OK') </script>";
+                      }
+
+                     
+                    }
+                      // else {
+                      //    echo "<script> alert('Nom obligatoire') </script>";
+                      // }
+                  // }
                   
-                  if ($name){
-                    $requete->execute();
-                  }
-                  else {
-                    //  echo "<script> alert('Nom obligatoire') </script>";
-                  }
 
             }
         catch(PDOException $e)
@@ -126,6 +133,9 @@ session_start();
 
                   $conn->close();
 
+                  if (!isset($_POST["submit"])){
+                    session_destroy();
+                }
               ?>     
     </div>
   </main>
