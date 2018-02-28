@@ -11,13 +11,14 @@
   <link rel="stylesheet" media="screen and (min-width: 1201px)" href="css/large.css">
   <link rel="stylesheet" href="css/base.css">
   <link rel="stylesheet" href="css/form.css">
+  <link rel="stylesheet" href="css/article.css">
   <link href="https://fonts.googleapis.com/css?family=Krona+One|Montserrat|Titillium+Web" rel="stylesheet">
   <!-- <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>-->
 </head>
 <body>
 
   <header>
-    <h1><a href="http://localhost/dev/CrashBlog/index.php">Crash Blog</a></h1>
+    <h1><a href="index.php">Crash Blog</a></h1>
   </header>
 
   <main>
@@ -31,7 +32,7 @@
           <h2>Création&nbsp;:</h2>
           <p><a href="#modale_auteur" id="auteur">Auteur</a></p>
           <p><a href="#modale_categorie" id="categorie">Catégorie</a></p>
-          <p><a href="#article" id="article">Article</a></p>
+          <p><a href="#modale_article" id="article">Article</a></p>
         </div>
 
 
