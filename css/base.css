@@ -89,3 +89,9 @@ a:visited
 {
   color: var(--color_emphasize2);
 }
+
+center
+{
+  padding: 0.3em;
+  margin: 1em;
+}

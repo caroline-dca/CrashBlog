@@ -1,37 +1,51 @@
 <!-- Code by Laure -->
+<form action="" method="POST">
+  <label for='newCat'>Catégories :
+    <div id="cat">
 <?php
 
+  $servername = "localhost";
+  $database = 'CrashBlog_Equipe1';
+  $username = "eole";
+  $password = "CorioMySQL&1";
 
-$servername = "localhost";
-$database = 'CrashBlog_Equipe1';
-$username = "eole";
-$password = "CorioMySQL&1";
+  try {
+      $conn = new PDO("mysql:host=$servername;dbname=$database", $username, $password);
+      // set the PDO error mode to exception
+      $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-try {
-    $conn = new PDO("mysql:host=$servername;dbname=$database", $username, $password);
-    // set the PDO error mode to exception
-    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+      $requete = $conn->prepare('INSERT INTO Categorie VALUES (:categorie)');
+      $requete->bindParam(':categorie', $cat);
 
-    // echo "Connected successfully";
-    print_r('<input list="Categorie" placeholder="Catégories existantes">');
-    print_r('<datalist id="Categorie">');
-    foreach ($conn->query('SELECT * FROM Categorie') as $ligne) {
-        print_r('<option value="' . $ligne[Nom_Categorie] . '">');
-        $conn = null;
+      foreach ($conn->query('SELECT * FROM Categorie') as $ligne) {
+          print_r('<p><input type="radio" name="Categorie" value="' . substr($ligne['Nom_Categorie'], 0, 4) . '">' . $ligne['Nom_Categorie'] . '</p>');
+          $conn = null;
+        }
+      if (($_POST <> "") && ($_POST <> "Nouvelle catégorie") && isset($_POST['newCat'])) {
+
+          if ( preg_match('/^[A-Za-zá-œ\.\- ]+$/', $_POST['newCat']) ) {
+            $cat = $_POST['newCat'];
+            $requete-> execute();
+            echo '<p>Catégorie créée.</p>';
+          }
+          elseif (!isset($_POST['Categorie'])) {
+            echo "<p>Erreur</p>";
+          }
+          else {
+            echo '<p align="center">Catégorie sélectionnée.</p>';
+          }
+        }
       }
-    print_r('</datalist>');
-    }
-catch(PDOException $e) {
-  echo "La connexion a échoué : " . $e->getMessage();
-    }
-
-    echo "<input type='text' name='newCat' placeholder='Nouvelle catégorie'>";
-
-// $query = "SELECT nom_pays FROM pays_table WHERE nom_pays='FRANCE'";
-//         $result = db_query($query);
-//         $row = db_fecth_array($result);
-//         $pays = $row[0];
-
+  catch(PDOException $e) {
+    echo "L'insertion a échoué, veillez à nommer une catégorie non existante avec des caractères autorisés. <br>";
+    echo $e->getMessage();
+      }
+  unset($_POST);
 ?>
-
-<!-- <label for='newCat'>Catégories :  -->
+    <p>
+      <input type="radio" name="Categorie" value="newCat">
+      <input type="text" id="newCat" name="newCat" placeholder="Nouvelle catégorie">
+    </p>
+  </div>
+  <center><input type='submit'></center>
+</form>
