@@ -1,6 +1,4 @@
-<?php
-session_start();
-?>
+<!-- Code by Caroline -->
 
 <!DOCTYPE html>
 <html lang="fr">
@@ -9,16 +7,12 @@ session_start();
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Crash Blog</title>
-  <link rel="stylesheet" href="css/base.css">
-  <link rel="stylesheet" href="css/form.css">
-  <link href="https://fonts.googleapis.com/css?family=Krona+One|Montserrat|Titillium+Web" rel="stylesheet">
 </head>
+
 <body>
 
-
-
-    <div id="creationAuteur">    
-      <form method="post" action = "" id="form">        
+    <div id="creationAuteur">
+      <form method="POST" action="" id="form">
         <p>
           <label for="name">Nom, prénom ou pseudo</label>
           <input type="text" name="name" id="name">
@@ -27,80 +21,77 @@ session_start();
           <label for="email">Email</label>
           <input type="email" name="email" id="email">
         </p>
-        <p>
-          <input type="submit" id="submit" value="Ajouter">
-        </p>
-      </form>    
 
         <?php
-
-          $servername = "localhost";
-          $username = "caroline";
-          $password = "LvebdlB2022";
-          $dbname = "CrashBlog_Equipe1";
-
+          include "param.php";
 
           try {
-              $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
+              $conn = new PDO("mysql:host=$servername;dbname=$database", $username, $password);
               // set the PDO error mode to exception
               $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
               // echo "Connected successfully";
-            
-                    $requete = $conn->prepare(
-                          "INSERT INTO Auteur (Nom_Auteur,Mail_Auteur)
-                          VALUES  (:name, :email)"
-                    );
 
-                    $requete->bindParam(':name', $name);
-                    $requete->bindParam(':email', $email);
-                              
-                    // if (isset($_POST))){
-                      if (isset($_POST["name"])){
-                        $email = $_POST["email"];
-                        $name = $_POST["name"]; 
-                        if ($name){
-                          $requete->execute();
-                          echo "<script> alert('Instertion OK') </script>";
-                        }
+                $requete = $conn->prepare(
+                      "INSERT INTO Auteur (Nom_Auteur, Mail_Auteur)
+                      VALUES  (:name, :email)"
+                      );
 
-                      
-                      }
-                        // else {
-                        //    echo "<script> alert('Nom obligatoire') </script>";
-                        // }
-                    // }
-                    
+                $requete->bindParam(':name', $name);
+                $requete->bindParam(':email', $email);
 
+                if (isset($_POST["name"]) && ($_POST["name"] <> "")) {
+                  if (preg_match('/^[A-Za-zá-œ]+$/', ($_POST["name"]))) {
+                    $email = $_POST["email"];
+                    $name = $_POST["name"];
+                    if ($name){
+                      $requete->execute();
+                      echo "<em>Insertion réussie.</em>";
+                    }
+                  }
+                  else {
+                     echo "<em>Veuillez entrer un nom ou pseudo composé uniquement de lettres.</em>";
+                  }
+                }
+                else {
+                  echo "<em>Veuillez entrer un nom.</em>";
+                }
               }
           catch(PDOException $e)
               {
-              echo "Connection failed: " . $e->getMessage();
-              die();
+                $raison = $e->getMessage();
+                if (strstr($raison, '[23000]')) {
+                  echo "<em>Entrée déjà existante.</em>";
+                }
+                else {
+                  echo "<em>L'insertion a échoué. </em>";
+                }
               }
 
+            unset($_POST["name"]);
+            unset($_POST["email"]);
+            $conn = null;
+          ?>
 
-          ?> 
-
+          <p>
+            <input type="submit" value="Ajouter">
+          </p>
+          </form>
 
       <div id = "listeAuteurs">
-          <p>Liste des auteurs déjà enregistrés:</p>     
-
+          <p>Liste des auteurs déjà enregistrés:</p>
 
           <?php
 
-                $servername = "localhost";
-                $username = "caroline";
-                $password = "LvebdlB2022";
-                $dbname = "CrashBlog_Equipe1";
-
+            include "param.php";
 
                 try {
-                    $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
+                    $conn = new PDO("mysql:host=$servername;dbname=$database", $username, $password);
                     // set the PDO error mode to exception
                     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
                     // echo "Connected successfully";
-                  
-                    echo '<table>'."\n";
+
+                    // Remplissage de la table des auteurs :
+                    echo '<table id="t_auteur">'."\n";
                     echo '<tr>';
                     echo '<td>Nom/Prénom/Pseudo</td>';
                     echo '<td>Email</td>';
@@ -112,22 +103,19 @@ session_start();
                         echo '</tr>'."\n";
                         }
                     echo '</table>'."\n";
-
-                    }
+                    // Fin de la table des auteurs
+                  }
                 catch(PDOException $e)
                     {
                     echo "Connection failed: " . $e->getMessage();
                     die();
                     }
 
-                    $conn->close();
+                    $conn=null;
 
-                    if (!isset($_POST["submit"])){
-                      session_destroy();
-                  }
-                ?>     
+                ?>
       </div>
     </div>
-  </main>
+
 </body>
 </html>

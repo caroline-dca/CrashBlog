@@ -1,13 +1,11 @@
 <!-- Code by Laure -->
 <form action="" method="POST">
-  <label for='newCat'>Catégories :
-    <div id="cat">
+  <h3>Catégories :</h3>
+  <input type="text" id="newCat" name="newCat" placeholder="Nouvelle catégorie">
+  <input type='submit'>
 <?php
 
-  $servername = "localhost";
-  $database = 'CrashBlog_Equipe1';
-  $username = "eole";
-  $password = "CorioMySQL&1";
+  include "param.php";
 
   try {
       $conn = new PDO("mysql:host=$servername;dbname=$database", $username, $password);
@@ -17,35 +15,53 @@
       $requete = $conn->prepare('INSERT INTO Categorie VALUES (:categorie)');
       $requete->bindParam(':categorie', $cat);
 
-      foreach ($conn->query('SELECT * FROM Categorie') as $ligne) {
-          print_r('<p><input type="radio" name="Categorie" value="' . substr($ligne['Nom_Categorie'], 0, 4) . '">' . $ligne['Nom_Categorie'] . '</p>');
-          $conn = null;
-        }
-      if (($_POST <> "") && ($_POST <> "Nouvelle catégorie") && isset($_POST['newCat'])) {
+      if (isset($_POST['newCat']) && ($_POST['newCat'] <> "")) {
 
-          if ( preg_match('/^[A-Za-zá-œ\.\- ]+$/', $_POST['newCat']) ) {
+          if ( preg_match('/^[A-Za-zá-œ]+[A-Za-z0-9á-œ\.\- ]+$/', $_POST['newCat']) ) {
             $cat = $_POST['newCat'];
             $requete-> execute();
-            echo '<p>Catégorie créée.</p>';
-          }
-          elseif (!isset($_POST['Categorie'])) {
-            echo "<p>Erreur</p>";
+            echo '<em>Catégorie créée.</em>';
           }
           else {
-            echo '<p align="center">Catégorie sélectionnée.</p>';
+            echo '<em>Veuillez utiliser des caractères autorisés.</em>';
           }
+        }
+        else {
+          echo '<em>Veuillez entrer un nom.</em>';
         }
       }
   catch(PDOException $e) {
-    echo "L'insertion a échoué, veillez à nommer une catégorie non existante avec des caractères autorisés. <br>";
-    echo $e->getMessage();
+        $raison = $e->getMessage();
+        if (strstr($raison, '[23000]')) {
+          echo "<em>Entrée déjà existante.</em>";
+        }
+        else {
+          echo "<em>L'insertion a échoué. </em>";
+        }
       }
-  unset($_POST);
+  unset($_POST['newCat']);
+  $conn=null;
 ?>
-    <p>
-      <input type="radio" name="Categorie" value="newCat">
-      <input type="text" id="newCat" name="newCat" placeholder="Nouvelle catégorie">
-    </p>
-  </div>
-  <center><input type='submit'></center>
+
+<div id="cat">
+  <?php
+
+    include "param.php";
+
+    try {
+        $conn = new PDO("mysql:host=$servername;dbname=$database", $username, $password);
+        // set the PDO error mode to exception
+        $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+        foreach ($conn->query('SELECT * FROM Categorie') as $ligne) {
+            print_r('<p>' . $ligne['Nom_Categorie'] . '</p>');
+          }
+        }
+    catch(PDOException $e) {
+          $raison = $e->getMessage();
+            echo "<em>Echec de connexion à la base de données. </em>";
+        }
+    $conn=null;
+  ?>
+</div>
 </form>

@@ -32,3 +32,8 @@ p, li
 {
   padding: 0.3em 1em;
 }
+
+#t_consult th:nth-child(3), #t_consult td:nth-child(3)
+{
+  display: none;
+}

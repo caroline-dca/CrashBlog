@@ -11,7 +11,6 @@
   <link rel="stylesheet" media="screen and (min-width: 1201px)" href="css/large.css">
   <link rel="stylesheet" href="css/base.css">
   <link rel="stylesheet" href="css/form.css">
-  <link rel="stylesheet" href="css/article.css">
   <link href="https://fonts.googleapis.com/css?family=Krona+One|Montserrat|Titillium+Web" rel="stylesheet">
   <!-- <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>-->
 </head>
@@ -40,7 +39,7 @@
 
         <div id='consult'>
           <h2>Consultation&nbsp;:</h2>
-          <p><a href="consultation.php">Articles en ligne</a></p>
+          <p><a href="#modale_consultation">Articles en ligne</a></p>
         </div>
 
     </section>
@@ -57,9 +56,11 @@
       <?php include 'article.php' ?>
     </div>
 
-    <?php include 'consultation.php' ?>
+    <div id="modale_consultation">
+      <?php include 'consultation.php' ?>
+    </div>
+    <script type="text/javascript" src="js/controle.js"></script>
 
-    <script type="text/javascript" src="js/onevent.js"></script>
 
     <!-- <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script> -->
 
