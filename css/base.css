@@ -53,12 +53,6 @@ section
                   transparent 20px);
 }
 
-ul
-{
-  display: flex;
-  justify-content: space-between;
-}
-
 h1
 {
   text-align: center;
@@ -77,9 +71,10 @@ h2
   font-variant: small-caps;
 }
 
-li
+h3
 {
-  list-style-type: none;
+  font-family: var(--txt_font_emphasize2);
+  margin-bottom: 0.5em;
 }
 
 a
@@ -118,4 +113,13 @@ center
   margin: auto;
   padding: 1em;
   visibility: visible;
+}
+
+em
+{
+  width: 100%;
+  display: inline-block;
+  background-color: var(--txt_color_neutral);
+  color: rgb(182, 27, 27);
+  text-align: center;
 }
