@@ -9,63 +9,91 @@
 
 <body>
 
-<input class="search" type="text" placeholder="search">
-<input type="submit" value="ok">
+<!-- Barre de recherche -->
+<!-- <input class="search" type="text" placeholder="search">
+<input type="submit" value="ok"> -->
 
-<select class= "trier">
-  <option value="">Titre</option>
-  <option value="">Date_Creation</option>
-  <option value="">URL_image</option>
-  <option value="">Auteur</option>
-  <option value="">categorie</option>
- </select>
- <input type="submit" value="ok" id="tri">
 
-<?php
+<!-- Filtre par Auteur et Catégorie -->
+    <form action="consultation.php" method="post">
+        <select name="auteurs" >
+            <option value="autor">Auteur</option>
+            <?php
+              include "param.php";
+              $base = new PDO("mysql:host=$servername;dbname=$database", $username, $password);
+              $reponse = $base->query("SELECT *, DATE_FORMAT(Date_Creation,'%d/%m/%Y %H:%i') as Date FROM Article");
+              $aut = $base->query('SELECT * FROM Auteur');
+              while ($donnees = $aut->fetch())
+              {
+              ?>
+                  <option value="<?php echo($donnees['Nom_Auteur']) ?>"><?php echo($donnees['Nom_Auteur']) ?></option>
+              <?php
+              }
+              $aut->closeCursor();
+            ?>
+        </select>
+        <select name="categ">
+            <option value="categorie">Catégorie</option>
+            <?php
+              $cato = $base->query('SELECT * FROM Categorie');
+              while ($donnees = $cato->fetch())
+              {
+            ?>
+                <option value="<?php echo($donnees['Nom_Categorie']) ?>"><?php echo($donnees['Nom_Categorie']) ?></option>
+            <?php
+                }
+                $cato->closeCursor();
+            ?>
+        </select>
+        <input type="submit" value="Trier" name="sub">
+    </form>
 
-  include "param.php";
+    <?php
+    
+    // $reponse = $base->query('SELECT * FROM Article');
+    // if (isset($_POST["sub"])){
+       
+        if(isset($_POST["auteurs"]) && $_POST["auteurs"]!==autor){
+            $done = $_POST["auteurs"];
+            $reponse = $base->prepare("SELECT *, DATE_FORMAT(Date_Creation,'%d/%m/%Y %H:%i') as Date  FROM Article WHERE Auteur = ? ");
+            $reponse->execute(array($done));  
+        }
+       
+        elseif(isset($_POST["categ"]) &&  $_POST["categ"]!==categorie){
+            $dcate = $_POST["categ"];
+            $reponse = $base->prepare("SELECT *, DATE_FORMAT(Date_Creation,'%d/%m/%Y %H:%i') as Date  FROM Article WHERE Categorie = ? ");
+            $reponse->execute(array($dcate));  
+        } else
+        { 
+            // echo "<p> Pas de tri </p>" ;
+           $reponse = $base->query("SELECT *, DATE_FORMAT(Date_Creation,'%d/%m/%Y %H:%i') as Date  FROM Article"); 
+        } 
+        // }  
 
-  $base = new PDO("mysql:host=$servername;dbname=$database", $username, $password);
-  $reponse = $base->query("SELECT *, DATE_FORMAT(Date_Creation,'%d/%m/%Y %H:%i') as Date FROM Article");
+    
 
   echo "<table id='t_consult'>";
   echo "<th>"."Titre"."</th>";
-  echo "<th>"."Date_Creation"."</th>";
-  echo "<th>"."URL_image"."</th>";
+  echo "<th>"."Date de création"."</th>";
+  echo "<th>"."URL de l'image"."</th>";
   echo "<th>"."Auteur"."</th>";
-  echo "<th>"."Categorie"."</th>";
-// DATE_FORMAT(ApprenantDateNaiss,'%d/%m/%Y') as DateNaiss
-    while ($file = $reponse->fetch()) {
+  echo "<th>"."Catégorie"."</th>";
+
+  while ($donnees = $reponse->fetch()) {
       echo "<tr>";
-      echo "<td>" . $file['Titre'] . "</td>";
-      echo "<td>" . $file['Date'] . "</td>";
-      echo "<td><img src='" . $file['URL_image'] . "'></td>";
-      echo "<td>" . $file['Auteur'] . "</td>";
-      echo "<td>" . $file['Categorie'] . "</td>";
+      echo "<td>" . $donnees['Titre'] . "</td>";
+      echo "<td>" . $donnees['Date'] . "</td>";
+      echo "<td><img src='" . $donnees['URL_image'] . "'></td>";
+      echo "<td>" . $donnees['Auteur'] . "</td>";
+      echo "<td>" . $donnees['Categorie'] . "</td>";
       echo "</tr>";
     }
-
+    $reponse->closeCursor();
   echo "</table>";
-?>
-
-
-<FORM method="POST">
-<input type="text" name="Titre">
-<SELECT name="nomAuteur" >
-<?php
-
-  include "param.php";
-
-  $bdd = new PDO("mysql:host=$servername;dbname=$database", $username, $password);
-
-  $reponse = $bdd->query('SELECT * FROM Auteur');
-
-  while ($file = $reponse->fetch()) {
-    echo "<option>", $file['Nom_Auteur'], "</option>";
-  }
 
 ?>
-</form>
+
+
 
 </body>
 </html>
